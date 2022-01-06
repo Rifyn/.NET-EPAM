@@ -7,8 +7,8 @@ namespace _2D_ARRAY
         static void Main(string[] args)
         {
             Console.WriteLine("Введите размерность массива");
-            int n = Int32.Parse(Console.ReadLine());
-            int m = Int32.Parse(Console.ReadLine());
+            int n = Check(Console.ReadLine());
+            int m = Check(Console.ReadLine());
             int[,] mas = new int[n,m];
             Random rand = new Random();
             for (int i = 0; i < n; i++)
@@ -20,7 +20,6 @@ namespace _2D_ARRAY
             }
             Print(mas);
             Console.WriteLine("Сумма элементов массива стоящих на чётных позициях " + PSum(mas));
-            Console.ReadKey();
         }
 
         public static void Print(int[,] mas)
@@ -47,6 +46,18 @@ namespace _2D_ARRAY
             }
 
             return sum;
+        }
+        public static int Check(string str)
+        {
+            if (Int32.TryParse(str, out int result))
+            {
+                return result;
+            }
+            else
+            {
+                Console.WriteLine("Некорректное значение, повторите попытку");
+                return Check(Console.ReadLine());
+            }
         }
     }
 }

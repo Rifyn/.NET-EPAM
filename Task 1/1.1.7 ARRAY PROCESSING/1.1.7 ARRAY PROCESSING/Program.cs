@@ -7,7 +7,7 @@ namespace ARRAY_PROCESSING
         static void Main(string[] args)
         {
             Console.WriteLine("Введите размерность массива");
-            int n = Int32.Parse(Console.ReadLine());
+            int n = Check(Console.ReadLine());
             int[] mas = new int[n];
             Random rand = new Random();
 
@@ -20,7 +20,6 @@ namespace ARRAY_PROCESSING
             Console.WriteLine("Минимальное число " + MinValue(mas));
             Sort(mas);
             Print(mas);
-            Console.ReadKey();
         }
         public static int MaxValue(int[]mas)
         {
@@ -64,6 +63,18 @@ namespace ARRAY_PROCESSING
                         mas[j] = tmp;
                     }
                 }
+            }
+        }
+        public static int Check(string str)
+        {
+            if (Int32.TryParse(str, out int result))
+            {
+                return result;
+            }
+            else
+            {
+                Console.WriteLine("Некорректное значение, повторите попытку");
+                return Check(Console.ReadLine());
             }
         }
     }
