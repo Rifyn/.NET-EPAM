@@ -10,8 +10,7 @@ namespace AVERAGES
             string str = Console.ReadLine();
             int words = 0;
             int letters = 0;
-            str = str.Replace(",", " ").Replace("."," ");
-            string [] arr = str.Split(' ');
+            string[] arr = str.Split(' ', '.', ',');
             foreach (string s in arr)
             {
                 if(s != "")

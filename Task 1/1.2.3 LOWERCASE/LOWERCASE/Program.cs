@@ -8,22 +8,16 @@ namespace LOWERCASE
         {
             Console.WriteLine("Введите строку");
             string str = Console.ReadLine();
-            bool flag = true;
-            int words = 0;
-            foreach (char s in str)
+            int lowercaseWords = 0;
+            string[] words = str.Split(' ',':',',',';');
+            foreach (string word in words)
             {
-                if (char.IsSeparator(s) || char.IsPunctuation(s))
-                { 
-                    flag = true;
-                }
-                else
+                if (word != "" && char.IsLower(word[0]))
                 {
-                    if (char.IsLower(s) && flag) words++;
-
-                    flag = false;
-                }             
+                    lowercaseWords++;
+                }
             }
-            Console.WriteLine(words);
+            Console.WriteLine(lowercaseWords);
         }
     }
 }

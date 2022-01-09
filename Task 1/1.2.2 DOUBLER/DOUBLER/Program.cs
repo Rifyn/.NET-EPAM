@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 
 namespace DOUBLER
 {
@@ -10,16 +11,16 @@ namespace DOUBLER
             string firststr = Console.ReadLine();
             Console.WriteLine("Введите вторую строку");
             string secondstr = Console.ReadLine();
-            string thirdstr = string.Empty;
+            StringBuilder thirdstr = new StringBuilder();
             foreach (char arg in firststr)
             {
                 if (secondstr.Contains(arg))
                 {
-                    thirdstr += new string(arg, 2);
+                    thirdstr.Append(arg, 2);
                 }
                 else 
                 {
-                    thirdstr += arg;
+                    thirdstr.Append(arg);
                 }
             }
             Console.WriteLine(thirdstr);

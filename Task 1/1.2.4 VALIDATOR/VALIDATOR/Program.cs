@@ -7,17 +7,17 @@ namespace VALIDATOR
     {
         static void Main(string[] args)
         {
-            bool flag = true;//метка нового предложения
+            bool isSentenceStart = true;
             Console.WriteLine("Введите строку");
             StringBuilder sb = new StringBuilder(Console.ReadLine());
             for (int i = 0; i < sb.Length; i++)
             {
-                if (flag && sb[i] != ' ')
+                if (isSentenceStart && sb[i] != ' ')
                 {
                     sb[i] = char.ToUpper(sb[i]);
-                    flag = false;
+                    isSentenceStart = false;
                 }
-                if(sb[i] == '.' || sb[i] == '!' || sb[i] == '?') flag = true;
+                if(sb[i] == '.' || sb[i] == '!' || sb[i] == '?') isSentenceStart = true;
             }
             Console.WriteLine(sb.ToString());
         } 
