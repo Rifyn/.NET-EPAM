@@ -7,7 +7,12 @@ namespace FONT_ADJUSTMENT
     {
         static void Main(string[] args)
         {
-            Dictionary<int, string> keyValuePairs = new Dictionary<int, string>();
+            Dictionary<string, bool> fontStateMap = new Dictionary<string, bool>() 
+            {
+                {"Bold",false },
+                {"Italic",false },
+                {"Underline",false }
+            };
             string str = string.Empty;
             bool flag = true;
             while (flag)
@@ -18,39 +23,35 @@ namespace FONT_ADJUSTMENT
                 switch (Console.ReadLine())
                 {
                     case "1":
-                        IndexCheck(keyValuePairs, 0, "Bold");
+                        IndexCheck(fontStateMap, "Bold");
                         break;
                     case "2":
-                        IndexCheck(keyValuePairs, 1, "Italic");
+                        IndexCheck(fontStateMap, "Italic");
                         break;
                     case "3":
-                        IndexCheck(keyValuePairs, 2, "Underline");
+                        IndexCheck(fontStateMap, "Underline");
                         break;
                     default:
                         flag = false;
                         break;
                 }
-                Output(keyValuePairs, out str);
+                Output(fontStateMap, out str);
             }
         }
-        public static void IndexCheck(Dictionary<int, string> keyValuePairs, int index, string value)
+        public static void IndexCheck(Dictionary<string,bool> keyValuePairs, string key)
         {
-            if (keyValuePairs.ContainsKey(index))
-            {
-                keyValuePairs.Remove(index);
-            }
-            else
-            {
-                keyValuePairs.Add(index, value);
-            }
+            keyValuePairs[key] = !keyValuePairs[key];
         }
-        public static void Output(Dictionary<int, string> keyValuePairs, out string str)
+        public static void Output(Dictionary<string,bool> keyValuePairs, out string str)
         {
             str = "";
             foreach (var item in keyValuePairs)
             {
-                if (str != "") str += ", ";
-                str += item.Value;
+                if (item.Value)
+                {
+                    if (str != "") str += ", ";
+                    str += item.Key;
+                }
             }
         }
     }
