@@ -4,42 +4,17 @@ public class MyString
     private char[] _customString;
     public char[] CustomString
     {
-        set
-        {
-            if (value == null)
-            {
-                _customString = new char[0];
-            }
-            else
-            {
-                _customString = value;
-            }
-        }
-        get
-        {
-            return _customString;
-        }
+        set => _customString = value;
+        get => _customString;
     }
     public MyString(string input)
     {
-        if (input != null) _customString = input.ToCharArray();
-        else _customString = new char[0];
+        _customString = input.ToCharArray();    
     }
     public char this[int index]
     {
         get => CustomString[index];
-        set
-        {
-            if (index >= CustomString.Length)
-            {
-                CustomString[CustomString.Length - 1] = value;
-            }
-            else if (index < 0)
-            {
-                CustomString[0] = value;
-            }
-            else CustomString[index] = value;
-        }
+        set => CustomString[index] = value;
     }
     public bool Equals(MyString str)
     {

@@ -7,7 +7,7 @@ namespace CUSTOM_STRING
     {
         public static void Main(string[] args)
         {
-            
+
         }
     }
 }

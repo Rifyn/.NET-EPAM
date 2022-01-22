@@ -19,9 +19,7 @@ namespace Classes
         }
         public double GetArea() => outer.GetArea() - inner.GetArea();
 
-        public void Print()
-        {
-            Console.WriteLine("кольцо");
-        }
+        public string Print() => $"Кольцо с площадью {GetArea()}";
+        
     }
 }

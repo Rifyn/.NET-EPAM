@@ -4,10 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Interfaces
+namespace Classes
 {
-    internal interface IPrintable
+    public abstract class FiguresWithCoordinates:Figures
     {
-        public string Print();
+        public Point Coordinates { get; private set; }
     }
 }

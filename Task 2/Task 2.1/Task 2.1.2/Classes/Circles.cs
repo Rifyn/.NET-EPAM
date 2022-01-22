@@ -9,7 +9,7 @@ namespace Classes
 {
     public class Circles : Figures, IPrintable
     {
-        public Point Coordinates { get; private set; }
+        
         public Circles(double r)
         {
             radius = r;
@@ -18,9 +18,6 @@ namespace Classes
         public double GetArea() => Math.PI * radius * radius;
         public double GetCircumflex() => 2 * Math.PI * radius;
 
-        public void Print() 
-        {
-            Console.WriteLine("круг");
-        }
+        public string Print()=> $"Круг с площадью {GetArea()} и длинной описанной окружности {GetCircumflex()}";
     }
 }
