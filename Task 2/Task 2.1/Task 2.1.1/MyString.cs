@@ -2,25 +2,20 @@
 public class MyString
 {
     private char[] _customString;
-    public char[] CustomString
-    {
-        set => _customString = value;
-        get => _customString;
-    }
     public MyString(string input)
     {
         _customString = input.ToCharArray();    
     }
     public char this[int index]
     {
-        get => CustomString[index];
-        set => CustomString[index] = value;
+        get => _customString[index];
+        set => _customString[index] = value;
     }
     public bool Equals(MyString str)
     {
-        if (this.CustomString.Length == str.CustomString.Length)
+        if (this._customString.Length == str._customString.Length)
         {
-            for (int i = 0; i < this.CustomString.Length; i++)
+            for (int i = 0; i < this._customString.Length; i++)
             {
                 if (this[i] != str[i]) return false;
             }
@@ -30,19 +25,19 @@ public class MyString
     }
     public static MyString operator +(MyString firstString, MyString secondString)
     {
-        return new MyString(firstString.CustomString.ToString() + secondString.CustomString.ToString());
+        return new MyString(firstString._customString.ToString() + secondString._customString.ToString());
     }
     public static bool operator <(MyString firstString, MyString secondString)
     {
-        return firstString.CustomString.Length < secondString.CustomString.Length;
+        return firstString._customString.Length < secondString._customString.Length;
     }
     public static bool operator >(MyString firstString, MyString secondString)
     {
-        return firstString.CustomString.Length > secondString.CustomString.Length;
+        return firstString._customString.Length > secondString._customString.Length;
     }
     public bool CharSearch(char symbol)
     {
-        foreach (char c in CustomString)
+        foreach (char c in _customString)
         {
             if (c == symbol) return true;
         }

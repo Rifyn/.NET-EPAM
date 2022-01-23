@@ -8,7 +8,23 @@ namespace Classes
 {
     public class Repository
     {
-        public static List<Figures> figuresArray = new List<Figures>();
+        private List<Figures> figuresArray = new List<Figures>();
         public Dictionary<string,List<Figures>> users = new Dictionary<string,List<Figures>>();
+
+        public void AddToArray(Figures figures)
+        {
+            figuresArray.Add(figures);
+        }
+        public void Clear()
+        {
+            figuresArray.Clear();
+        }
+        public void PrintAll()
+        {
+            foreach (var f in figuresArray)
+            {
+                Console.WriteLine(f);
+            }
+        }
     }
 }

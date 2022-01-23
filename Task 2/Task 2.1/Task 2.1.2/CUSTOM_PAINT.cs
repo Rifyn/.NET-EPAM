@@ -1,7 +1,6 @@
 ﻿using Classes;
 using System;
 using System.Text;
-using Interfaces;
 
 namespace CUSTOM_PAINT
 {

@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Interfaces;
 
 namespace Classes
 {
@@ -11,6 +10,7 @@ namespace Classes
     {
         public static void Start()
         {
+            Repository figuresArray = new Repository();
             bool flag = true;           
             do
             {
@@ -25,13 +25,13 @@ namespace Classes
                                           "1. Круг\n" +
                                           "2. Кольцо");
                         FigureType figureType = (FigureType)Check(Console.ReadLine());
-                        AddFigure(Repository.figuresArray, figureType);
+                        AddFigure(figuresArray, figureType);
                         break;
                     case "2":
-                        PrintAll(Repository.figuresArray);
+                        figuresArray.PrintAll();
                         break;
                     case "3":
-                        Clear();
+                        figuresArray.Clear();
                         break;
                     case "4":
                         flag = false;
@@ -41,36 +41,24 @@ namespace Classes
             } while (flag);
         }
 
-        public static void AddFigure(List<Figures> mas, FigureType figureType)
+        public static void AddFigure(Repository mas, FigureType figureType)
         {
             switch (figureType)
             {
                 case FigureType.circles:
                     Console.WriteLine("Введите радиус");
-                    mas.Add(new Circles(Check(Console.ReadLine())));
+                    mas.AddToArray(new Circles(Check(Console.ReadLine())));
                     break;
                 case FigureType.ring:
                     Console.WriteLine("Введите внутренний радиус");
                     int inner = Check(Console.ReadLine());
                     Console.WriteLine("Введите внешний радиус");
                     int outer = Check(Console.ReadLine());
-                    mas.Add(new Ring(inner, outer));
+                    mas.AddToArray(new Ring(inner, outer));
                     break;
                 default:
                     Console.WriteLine("Неверно действие");
                     break;
-            }
-        }
-        public static void Clear()
-        {
-            Repository.figuresArray.Clear();
-            //Console.Clear();
-        }
-        public static void PrintAll(List<Figures> mas)
-        {
-            foreach (IPrintable f in mas)
-            {
-                Console.WriteLine(f.Print());          
             }
         }
 

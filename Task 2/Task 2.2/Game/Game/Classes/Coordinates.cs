@@ -36,9 +36,6 @@ namespace Game.Classes
     {
         public Point position;
         protected char visual;
-        public char Visual 
-        {
-            get => visual; 
-        }
+        public char Visual => visual;
     }
 }

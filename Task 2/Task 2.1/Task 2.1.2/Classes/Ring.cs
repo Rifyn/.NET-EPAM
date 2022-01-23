@@ -3,11 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Interfaces;
 
 namespace Classes
 {
-    public class Ring:Figures, IPrintable
+    public class Ring:Figures
     {
         public Circles inner;
         public Circles outer;
@@ -19,7 +18,7 @@ namespace Classes
         }
         public double GetArea() => outer.GetArea() - inner.GetArea();
 
-        public string Print() => $"Кольцо с площадью {GetArea()}";
+        public override string ToString() => $"Кольцо с площадью {GetArea()}";
         
     }
 }
