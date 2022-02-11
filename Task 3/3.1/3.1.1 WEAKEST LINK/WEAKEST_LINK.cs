@@ -20,13 +20,15 @@ namespace WEAKEST_LINK
             int n = Check(Console.ReadLine());
             Console.WriteLine("Введите, какой по счету человек будет вычеркнут каждый раунд:");
             int dropOutNumber = Check(Console.ReadLine());
+            int turn = 1;
+            int id;
             int round = 1;
             for (int i = 1; i <= n; i++)
             {
                 persons.Add(new Person { Id = i });
             }
             
-            while (true)
+            for (int i = 1; ;i++)
             {
                 if (persons.Count < dropOutNumber)
                 {
@@ -35,9 +37,28 @@ namespace WEAKEST_LINK
                 }
                 else 
                 {
-                    persons.RemoveAt(dropOutNumber - 1);
-                    Console.WriteLine("Раунд {0}. Вычеркнут человек. Людей осталось: {1}", round++, persons.Count);
+                    if (turn == dropOutNumber)
+                    {
+                        foreach (Person p in persons)
+                        {
+                            Console.WriteLine(p);
+                        }
+                        id = persons[i - 1].Id;
+                        persons.RemoveAt(i - 1);
+                        Console.WriteLine("Раунд {0}. Вычеркнут человек №{1}. Людей осталось: {2}", round++, id, persons.Count);
+                        turn = 1;
+                        i--;
+                    }
+                    else
+                    {
+                        turn++;
+                    }     
                 }
+                if (persons.Count <= i) i = 0;
+            }
+            foreach (Person p in persons)
+            {
+                Console.WriteLine(p);
             }
         }
         public static int Check(string str)

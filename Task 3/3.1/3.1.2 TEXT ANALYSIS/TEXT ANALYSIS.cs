@@ -47,15 +47,16 @@ namespace TEXT_ANALYSIS
         public static void FavoriteWords(Dictionary<string, int> words)
         {
             var res = words.Where(x => x.Value > 5);
-            if(res.Count() > 0)
+            string tmp = string.Empty;
+            foreach (var word in res)
             {
-                Console.WriteLine("Favorite words");
-                foreach (var word in res)
-                {
-                    Console.WriteLine(word.Key);
-                }
+                tmp += " " + word.Key;
             }
-            else Console.WriteLine("No favorite words");
+            if (tmp == string.Empty)
+            {
+                Console.WriteLine("No favorite words");
+            }
+            else Console.WriteLine("Favorite words:" + tmp);
         }
     }
     
