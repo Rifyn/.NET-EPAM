@@ -9,24 +9,25 @@ namespace PIZZA_TIME
     public class User
     {
         public string Name { get; init; }
-
-        public User(string name)
+        private Pizzeria _pizzeria;
+        private Order _order;
+        public User(string name, Pizzeria pizzeria)
         {
             Name = name;
+            _pizzeria = pizzeria;
         }
 
-        public void MakeOrder(PizzaType pizzaType)
+        public void MakeOrder(PizzaType.PizzaT pizzaType)
         {
-            Order.TakeOrder += TakePizza;
-            Order.MakeOrder(Name, pizzaType);
-
+            _order = new Order(pizzaType, _pizzeria, this);
+            _order.TakeOrder += TakePizza;
+            _order.MakeOrder(_order.ID, pizzaType);
         }
 
-        private void TakePizza(PizzaType pizzaType)
+        public void TakePizza(PizzaType.PizzaT pizzaType)
         {
-            Console.WriteLine("{0} забрал заказ {1}", Name, pizzaType);
-            Order.TakeOrder -= TakePizza;
+            ConsoleUI.PrintOrderReady(pizzaType, Name);
+            _order.TakeOrder -= TakePizza;
         }
-
     }
 }

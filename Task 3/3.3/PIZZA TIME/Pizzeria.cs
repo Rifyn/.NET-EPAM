@@ -10,41 +10,26 @@ namespace PIZZA_TIME
     public class Pizzeria
 
     {
-        static public event EventHandler<OrderArgs> EndOfCooking;
-        static public void ConfirmOrder(int id, PizzaType pizzaType)
+        //public event EventHandler<OrderArgs> EndOfCooking;
+        public delegate void EventHandler(int id, PizzaType.PizzaT pizzaType);
+        public event EventHandler EndOfCooking;
+        public void ConfirmOrder(int id, PizzaType.PizzaT pizzaType)
         {
             Cooking(id, pizzaType);
         }
 
-        static private void Cooking(int id, PizzaType pizzaType)
+        private async void Cooking(int id, PizzaType.PizzaT pizzaType)
         {
-            Thread.Sleep(3000);
-            GiveOrder(id, pizzaType);
+            var task = new Task(() => GiveOrder(id, pizzaType));
+            task.Wait(TimeSpan.FromSeconds(3));
+            task.Start();
+            await task;
+
         }
 
-        static private void GiveOrder(int id, PizzaType pizzaType)
+        private void GiveOrder(int id, PizzaType.PizzaT pizzaType)
         {
-            EndOfCooking?.Invoke(null, new OrderArgs(id, pizzaType));
+            EndOfCooking?.Invoke(id, pizzaType);
         }
-    }
-
-    public class OrderArgs : EventArgs
-    {
-        public int ID { get; }
-        public PizzaType TypePizza { get; }
-
-        public OrderArgs(int ID, PizzaType pizzaType)
-        {
-            this.ID = ID;
-            this.TypePizza = pizzaType;
-        }
-    }
-
-    public enum PizzaType
-    {
-        Margherita,
-        Marinara,
-        Carbonara,
-        Napoletana
     }
 }

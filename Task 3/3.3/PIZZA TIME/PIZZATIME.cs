@@ -6,8 +6,13 @@ namespace PIZZA_TIME
     {
         static void Main(string[] args)
         {
-            User user1 = new User("12345");
-            user1.MakeOrder(PizzaType.Napoletana);
+            
+            Pizzeria pizzeria = new Pizzeria();
+            User user2 = new User("4124", pizzeria);
+            User user1 = new User("12345", pizzeria);
+            user1.MakeOrder(PizzaType.PizzaT.Carbonara);
+            user2.MakeOrder(PizzaType.PizzaT.Margherita);
+            
         }
     }
 }

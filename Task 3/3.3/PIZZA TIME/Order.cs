@@ -8,30 +8,34 @@ namespace PIZZA_TIME
 {
     public class Order
     {
-        static private int _id = 0;
-        static public event Action<PizzaType> TakeOrder = (pizzaType) => { };
+        private static int _id = 0;
+        public event Action<PizzaType.PizzaT> TakeOrder = (pizzaType) => { };
+        private Pizzeria _pizzeria;
+        private string _name;
         public int ID { get; }
-        public PizzaType PizzaTypes { get; init; }
+        public PizzaType.PizzaT PizzaTypes { get; init; }
 
-        public Order(PizzaType pizzaTypes)
+        public Order(PizzaType.PizzaT pizzaTypes, Pizzeria pizzeria, User user)
         {
             ID = _id++;
             PizzaTypes = pizzaTypes;
+            _pizzeria = pizzeria;
+            _name = user.Name;
         }
 
-        public static void MakeOrder(string name, PizzaType typePizza)
+        public void MakeOrder(int id, PizzaType.PizzaT typePizza)
         {
-            Pizzeria.EndOfCooking += OrderIsReady;
-            Console.WriteLine("Заказ номер:{0} на имя {1} принят ", _id, name);
-            Pizzeria.ConfirmOrder(_id, typePizza);
-            _id++;
+            _pizzeria.EndOfCooking += OrderIsReady;
+            _pizzeria.ConfirmOrder(id, typePizza);
+            ConsoleUI.PrintOrder(id, _name);
         }
 
-        public static void OrderIsReady(Object sender, OrderArgs orderArgs)
+        public void OrderIsReady(int id, PizzaType.PizzaT typePizza)
         {
-            Pizzeria.EndOfCooking -= OrderIsReady;
-            Console.WriteLine("Заказ номер:{0} готов", orderArgs.ID);
-            TakeOrder?.Invoke(orderArgs.TypePizza);
+            _pizzeria.EndOfCooking -= OrderIsReady;
+            ConsoleUI.PrintOrderReady(id, _name);
+            TakeOrder?.Invoke(typePizza);
+            
         }
 
     }
