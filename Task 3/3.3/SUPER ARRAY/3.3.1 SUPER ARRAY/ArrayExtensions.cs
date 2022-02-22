@@ -44,16 +44,67 @@ namespace SUPER_ARRAY
             return res;
         }
 
-        public static double Average(this IEnumerable<int> mas) => mas.Average(x => x);
-        public static double Average(this IEnumerable<float> mas) => mas.Average(x => x);
-        public static double Average(this IEnumerable<double> mas) => mas.Average(x => x);
-        public static double Average(this IEnumerable<long> mas) => mas.Average(x => x);
-        public static decimal Average(this IEnumerable<decimal> mas) => mas.Average(x => x);
+        public static double Average(this IEnumerable<int> mas)
+        {
+            double sum = 0;
+            int count = 0;
+            foreach(int i in mas)
+            {
+                sum += i;
+                count++;
+            }
+            return sum / count;
+        }
+        public static float Average(this IEnumerable<float> mas)
+        {
+            float sum = 0;
+            int count = 0;
+            foreach (int i in mas)
+            {
+                sum += i;
+                count++;
+            }
+            return sum / count;
+        }
+        public static double Average(this IEnumerable<double> mas)
+        {
+            double sum = 0;
+            int count = 0;
+            foreach (int i in mas)
+            {
+                sum += i;
+                count++;
+            }
+            return sum / count;
+        }
+        public static double Average(this IEnumerable<long> mas)
+        {
+            long sum = 0;
+            int count = 0;
+            foreach (int i in mas)
+            {
+                sum += i;
+                count++;
+            }
+            return (double)sum / count;
+        }
+        public static decimal Average(this IEnumerable<decimal> mas)
+        {
+            decimal sum = 0;
+            int count = 0;
+            foreach (int i in mas)
+            {
+                sum += i;
+                count++;
+            }
+            return sum / count;
+        }
 
         public static T MostRepeatedElement<T>(this IEnumerable<T> mas)
         {
             Dictionary<T, int> repeatedElements = new Dictionary<T, int>();
-
+            T maxElement = default(T);
+            int count = 0;
             foreach (var element in mas)
             {
                 if (repeatedElements.ContainsKey(element))
@@ -65,14 +116,25 @@ namespace SUPER_ARRAY
                     repeatedElements.Add(element, 1);
                 }
             }
-            return repeatedElements.Where(x => x.Value == repeatedElements.Max(x => x.Value)).FirstOrDefault().Key;
+            foreach (var element in repeatedElements)
+            {
+                if(count < element.Value)
+                {
+                    count = element.Value;
+                    maxElement = element.Key;
+                }
+            }
+            return maxElement;
         }
 
         public static void ApplyToMass<T>(T[] mas, Func<T, T> func)
         {
             for (int i = 0; i < mas.Length; i++)
             {
-                mas[i] = func.Invoke(mas[i]);
+                if (func != null)
+                {
+                    mas[i] = func.Invoke(mas[i]);
+                }
             }
         }
     }
