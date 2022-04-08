@@ -1,0 +1,12 @@
+ul{
+    width: 200px;
+    color: brown;
+    background : #f9e598;
+    border: solid 1px black;
+    padding: 5px;
+    border-radius: 10px;
+    box-shadow: 5px 5px 0px 0px #851c1c;
+}
+li{
+    padding: 5px;
+}
